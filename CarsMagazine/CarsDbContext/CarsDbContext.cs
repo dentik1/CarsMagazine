@@ -1,17 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CarsDbContext.Management.DbModels;
+using System;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.Entity.ModelConfiguration.Configuration;
 
 namespace CarsDbContext.Management
 {
     public class CarsDbContext : DbContext
     {
+        public DbSet<Brand> Brands { get; set; }
+
+        public DbSet<Model> Models { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Brand>().ToTable();
+            modelBuilder.Entity<Model>().ToTable();
+
+            modelBuilder.Entity<Brand>().Map(m =>
+           {
+               m.Properties(p => new { p.ID });
+               m.ToTable();
+           });
+
+            modelBuilder.Entity<Model>().Map(m =>
+           {
+               m.Properties(prop => prop.ID);
+               m.ToTable();
+           });
+
             base.OnModelCreating(modelBuilder);
         }
     }
