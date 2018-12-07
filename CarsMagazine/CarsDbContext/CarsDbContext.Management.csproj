@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CarsDbContext.cs" />
+    <Compile Include="Configurations\BrandsModelsConfiguration.cs" />
     <Compile Include="DbModels\Brand.cs" />
     <Compile Include="DbModels\BrandsModels.cs" />
     <Compile Include="DbModels\Model.cs" />

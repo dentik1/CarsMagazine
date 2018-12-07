@@ -1,4 +1,5 @@
-﻿using CarsDbContext.Management.DbModels;
+﻿using CarsDbContext.Management.Configurations;
+using CarsDbContext.Management.DbModels;
 using System;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Configuration;
@@ -11,8 +12,13 @@ namespace CarsDbContext.Management
 
         public DbSet<Model> Models { get; set; }
 
+        public DbSet<BrandsModels> BrandsModels { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            var brandsModels = new BrandsModelsConfiguration();
+            brandsModels.Configure();
+            modelBuilder.Configurations.Add(new BrandsModels())
             modelBuilder.Entity<Brand>().ToTable();
             modelBuilder.Entity<Model>().ToTable();
 
